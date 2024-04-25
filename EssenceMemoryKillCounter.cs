@@ -72,7 +72,6 @@ namespace EssenceMemoryKillCounter
 
         public override void Render()
         {
-            if (!_canTick) return;
             var area = GameController.Area;
             var essenceText = $"Essences Killed: {essenceKilled[area.CurrentArea.Name].Count()}";
             if (Settings.ShowKilledEssenceExileName && essenceKilled.Count(essk => essk.Key.Equals(area.CurrentArea.Name) && essk.Value.Count > 1) > 0)
