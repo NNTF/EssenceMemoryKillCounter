@@ -120,7 +120,6 @@ namespace EssenceMemoryKillCounter
                     }
             }
 
-                var textSize = Graphics.MeasureText(essenceText) * 45;
                 var pos = new Vector2(Settings.PositionX.Value, Settings.PositionY.Value);
                 var bgSize = Settings.BackgroundSize.Value;
                 var box = Graphics.DrawText(essenceText, pos, Settings.TextColor);
