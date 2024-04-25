@@ -74,10 +74,10 @@ namespace EssenceMemoryKillCounter
         {
             if (!_canTick) return;
             var area = GameController.Area;
-            var essenceText = $"Essence Killed: {essenceKilled[area.CurrentArea.Name].Count()}";
+            var essenceText = $"Essences Killed: {essenceKilled[area.CurrentArea.Name].Count()}";
             if (Settings.ShowKilledEssenceExileName && essenceKilled.Count(essk => essk.Key.Equals(area.CurrentArea.Name) && essk.Value.Count > 1) > 0)
             {
-                essenceText += $"\nExile killed:";
+                essenceText += $"\nExiles killed:";
                     foreach (var exile in essenceKilled[area.CurrentArea.Name])
                     {
                        essenceText += $"\n * {exile.EssenceName}";
