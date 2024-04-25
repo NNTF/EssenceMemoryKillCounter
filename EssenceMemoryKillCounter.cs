@@ -42,9 +42,11 @@ namespace EssenceMemoryKillCounter
 
         public override Job Tick()
         {
+            _canTick = true;
             if (_ingameUiCheckVisible?.Value == true ||
                 Camera == null || GameController.Area.CurrentArea.IsTown || GameController.Area.CurrentArea.IsHideout)
             {
+                _canTick = false;
                 return null;
             }
 
@@ -72,11 +74,12 @@ namespace EssenceMemoryKillCounter
 
         public override void Render()
         {
+            if (!_canTick) return;
             var area = GameController.Area;
-            var essenceText = $"Essences Killed: {essenceKilled[area.CurrentArea.Name].Count()}";
+            var essenceText = $"Essence Killed: {essenceKilled[area.CurrentArea.Name].Count()}";
             if (Settings.ShowKilledEssenceExileName && essenceKilled.Count(essk => essk.Key.Equals(area.CurrentArea.Name) && essk.Value.Count > 1) > 0)
             {
-                essenceText += $"\nExiles killed:";
+                essenceText += $"\nExile killed:";
                     foreach (var exile in essenceKilled[area.CurrentArea.Name])
                     {
                        essenceText += $"\n * {exile.EssenceName}";
@@ -87,6 +90,7 @@ namespace EssenceMemoryKillCounter
                 var bgSize = Settings.BackgroundSize.Value;
                 var box = Graphics.DrawText(essenceText, pos, Settings.TextColor);
                 Graphics.DrawBox(pos - new Vector2(bgSize, bgSize), pos + new Vector2(box.X, box.Y) + new Vector2(bgSize, bgSize), Settings.BackgroundColor, 2);
+          
 
         }
 
